@@ -51,6 +51,7 @@ def main(args):
         f = open(waveFile.rstrip(".wav") + ".txt", 'w')
         logging.debug("Saving Transcript @: %s" % waveFile.rstrip(".wav") + ".txt")
 
+        end_time = 0
         for i, segment in enumerate(segments):
             # Run deepspeech on the chunk that just completed VAD
             logging.debug("Processing chunk %002d" % (i,))
@@ -58,8 +59,10 @@ def main(args):
             output = wavTranscriber.stt(model_retval[0], audio, sample_rate)
             inference_time += output[1]
             logging.debug("Transcript: %s" % output[0])
-
-            f.write(output[0] + " ")
+            audio_segment_length = len(audio)/sample_rate
+            start_time = end_time
+            end_time = start_time + audio_segment_length
+            f.write(output[0] + "," + start_time + "," + end_time)
 
         # Summary of the files processed
         f.close()
