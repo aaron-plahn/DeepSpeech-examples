@@ -62,7 +62,7 @@ def main(args):
             audio_segment_length = len(audio)/sample_rate
             start_time = end_time
             end_time = start_time + audio_segment_length
-            f.write(output[0],",",start_time,",",end_time)
+            f.write(output[0] + "," + str(start_time) + "," + str(end_time))
 
         # Summary of the files processed
         f.close()
