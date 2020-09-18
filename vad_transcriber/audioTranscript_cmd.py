@@ -63,6 +63,7 @@ def main(args):
             start_time = end_time
             end_time = start_time + audio_segment_length
             f.write(output[0] + "," + str(start_time) + "," + str(end_time))
+            f.write('\n')
 
         # Summary of the files processed
         f.close()
