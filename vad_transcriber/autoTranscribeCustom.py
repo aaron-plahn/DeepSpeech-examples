@@ -54,6 +54,7 @@ def main(args):
         end_time = start_time + audio_segment_length
         f.write(str(start_time) + "\t" + str(end_time)+"\t"+content)
         f.write('\n')
+        return end_time
 
     for i, segment in enumerate(segments):
         # Run deepspeech on the chunk that just completed VAD
@@ -62,7 +63,7 @@ def main(args):
         output = wavTranscriber.stt(model_retval[0], audio, sample_rate)
         inference_time += output[1]
 
-        writeLine(len(audio)/sample_rate,output[0],end_time,file=f)
+        end_time = writeLine(len(audio)/sample_rate,output[0],end_time,file=f)
 
     # Summary of the files processed
     f.close()
