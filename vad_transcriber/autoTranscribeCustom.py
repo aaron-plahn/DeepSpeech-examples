@@ -8,7 +8,7 @@ import numpy as np
 # Debug helpers
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
-def getParser():
+def parseArgs():
     parser = argparse.ArgumentParser(description='Transcribe long audio files using webRTC VAD or use the streaming interface')
     parser.add_argument('--aggressive', type=int, choices=range(4), required=False,
                         help='Determines how aggressive filtering out non-speech is. (Interger between 0-3)')
@@ -18,10 +18,10 @@ def getParser():
                         help='Path to directory that contains all model files (output_graph and scorer)')
     parser.add_argument('--stream', required=False, action='store_true',
                         help='To use deepspeech streaming interface')
-    return parser
+    return parser.parse_args()
 
 def main(args):
-    parser = getParser()
+    args = parseArgs()
     
     # Point to a path containing the pre-trained models & resolve ~ if used
     dirName = os.path.expanduser(args.model)
