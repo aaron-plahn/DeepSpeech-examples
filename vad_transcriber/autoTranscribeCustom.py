@@ -59,7 +59,7 @@ def main(args):
         # Run deepspeech on the chunk that just completed VAD
         logging.debug("Processing chunk %002d" % (i,))
         audio = np.frombuffer(segment, dtype=np.int16)
-        output = wavTranscriber.stt(model_retval[0], audio, sample_rate,file=f)
+        output = wavTranscriber.stt(model_retval[0], audio, sample_rate)
         inference_time += output[1]
 
         writeLine(len(audio)/sample_rate,output[0],end_time,file=f)
