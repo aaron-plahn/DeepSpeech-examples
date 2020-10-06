@@ -52,7 +52,7 @@ def main(args):
         audio_segment_length = len(audio)/sample_rate
         start_time = end_time
         end_time = start_time + audio_segment_length
-        f.write(content + "," + str(start_time) + "," + str(end_time))
+        f.write(str(start_time) + "\t" + str(end_time)+"\t"+content)
         f.write('\n')
 
     for i, segment in enumerate(segments):
